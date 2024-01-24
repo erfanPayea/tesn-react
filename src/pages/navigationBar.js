@@ -1,13 +1,13 @@
 import React from 'react';
 import {Container, Nav, Navbar} from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css"
-import "./styles.css"
+import "./navigationBar_styles.css"
 import {Link, Outlet } from "react-router-dom";
 
 function NavigationBar() {
     return (
         <>
-            <Navbar data-bs-theme="dark" fixed="top" expand="lg" style={{backgroundColor: "#cb8113"}}>
+            <Navbar className="navbar-custom" data-bs-theme="dark" fixed="top" expand="lg">
                 <Container>
                     <Navbar.Brand href="/">TESN</Navbar.Brand>
                     <Nav className="me-auto">
