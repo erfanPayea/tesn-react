@@ -1,43 +1,30 @@
-import './App.css';
-import React from "react";
-import "bootstrap/dist/css/bootstrap.min.css"
-import NavigationBar from "./pages/navigationBar";
-import {createBrowserRouter, RouterProvider} from "react-router-dom";
-import Home from "./pages/Home";
-import Pricing from "./pages/Pricing";
-import Cities from "./pages/Cities";
-import Account from "./pages/Account";
+// src/App.js
 
-const router = createBrowserRouter([
-    {
-        element: <NavigationBar/>,
-        children: [
-            {
-                path: "/",
-                element: <Home/>
-            },
-            {
-                path: "/pricing",
-                element: <Pricing/>
-            },
-            {
-                path: "/cities",
-                element: <Cities/>
-            },
-            {
-                path: "/account",
-                element: <Account/>
-            }
-        ]
-    }
-])
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Home from './pages/Home';
+import UserProfilePage from './pages/UserProfilePage';
+import CityPage from './pages/CityPage';
+import AttractionPage from './pages/AttractionPage';
+import SideMenu from './components/SideMenu';
+import SignUp from './pages/SignUp';
 
-function App() {
+
+const App = () => {
   return (
-    <div className="App" style={{padding:"100px"}}>
-        <RouterProvider router={router}/>
-    </div>
+    <Router>
+      <div style={{ display: 'flex' }}>
+        <SideMenu />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/user/:userId" element={<UserProfilePage />} />
+          <Route path="/city/:cityId" element={<CityPage />} />
+          <Route path="/attraction/:attractionId" element={<AttractionPage />} />
+        </Routes>
+      </div>
+    </Router>
   );
-}
+};
 
 export default App;

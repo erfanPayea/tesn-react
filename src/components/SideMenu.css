@@ -1,0 +1,78 @@
+/* src/components/SideMenu.css */
+
+.side-menu {
+    position: fixed;
+    top: 0;
+    left: -200px; /* Initially off-screen */
+    width: 200px;
+    height: 100%; /* Set height to 100% to cover the entire screen */
+    background-color: #222; /* Darker color for the menu */
+    color: #fff;
+    overflow-y: hidden; /* Prevent scrolling */
+    transition: left 0.3s ease;
+    border-top-right-radius: 20px; /* Rounded top-right corner */
+    border-bottom-right-radius: 20px; /* Rounded bottom-right corner */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Add shadow for floating effect */
+  }
+  
+  .side-menu.open {
+    left: 0; /* Slide in when open */
+  }
+  
+  .toggle-btn {
+    position: fixed; /* Position fixed for accessibility */
+    top: 10px; /* Move the button up slightly */
+    left: 10px; /* Adjust for accessibility */
+    background: #333; /* Darker color for the button */
+    border: none;
+    border-radius: 50%; /* Make the button round */
+    width: 40px;
+    height: 40px;
+    color: #fff;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Add shadow for floating effect */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1; /* Ensure button appears above the menu */
+  }
+  
+  .toggle-btn:hover {
+    background: #444; /* Darken button color on hover */
+  }
+  
+  /* Style for open arrow */
+  .toggle-btn.open::before {
+    content: "\25BA"; /* Unicode for right-pointing triangle */
+  }
+  
+  /* Style for close cross */
+  .toggle-btn.close::before {
+    content: "\2715"; /* Unicode for cross mark */
+  }
+  
+  .side-menu nav {
+    margin-top: 60px; /* Move menu items down slightly */
+  }
+  
+  .side-menu nav ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .side-menu nav ul li {
+    padding: 10px 0;
+    border-bottom: 1px solid #555;
+  }
+  
+  .side-menu nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    display: block;
+    padding: 5px 20px; /* Adjust padding for better readability */
+  }
+  
+  .side-menu nav ul li a:hover {
+    background-color: #555;
+  }
+  

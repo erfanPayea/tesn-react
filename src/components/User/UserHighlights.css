@@ -1,0 +1,32 @@
+/* UserHighlights.css */
+
+.user-highlights-container {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .section-title {
+    color: #333;
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .highlight {
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 15px;
+  }
+  
+  .highlight-title {
+    color: #007bff;
+    font-size: 18px;
+  }
+  
+  .highlight-description {
+    color: #666;
+  }
+  
