@@ -43,7 +43,7 @@ const ChatPage = () => {
             navigate("../");
             return;
         }
-        getData();
+        getData( );
     }, []);
 
 
