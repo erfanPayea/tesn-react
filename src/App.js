@@ -8,6 +8,7 @@ import CityPage from './pages/CityPage';
 import AttractionPage from './pages/AttractionPage';
 import SideMenu from './components/SideMenu';
 import SignUp from './pages/SignUp';
+import Verification from './pages/Verification';
 
 
 const App = () => {
@@ -18,6 +19,7 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/signup" element={<SignUp />} />
+          <Route path="/verification" element={<Verification />} />
           <Route path="/user/:userId" element={<UserProfilePage />} />
           <Route path="/city/:cityId" element={<CityPage />} />
           <Route path="/attraction/:attractionId" element={<AttractionPage />} />
