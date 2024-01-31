@@ -48,7 +48,7 @@ const UserProfilePage = () => {
             return;
         }
         getData();
-    },);
+    }, []);
 
   return (
     <div className="user-profile-container">
