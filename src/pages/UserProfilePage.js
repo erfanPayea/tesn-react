@@ -1,17 +1,19 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import {Link, useNavigate} from 'react-router-dom';
 import './UserProfilePage.css'; // Import CSS for styling
 import UserHighlight from '../components/User/UserHighlights'; // Corrected import path
 import UserPost from '../components/User/UserPosts'; // Corrected import path
-import UserReview from '../components/User/UserReviews'; // Corrected import path
+import UserReview from '../components/User/UserReviews';
+import useLocalStorageState from "../components/UseLocalStorageState"; // Corrected import path
 
 
-const UserProfilePage = () => {
+function UserProfilePage() {
 
     const navigate = useNavigate();
     // const [error, setError] = useState('');
-    const [data, setData] = useState({})
-    const getData = async () => {
+    const [userData, setUserData] = useLocalStorageState("userData" ,{})
+
+    async function getData() {
         // Perform login logic here with username and password
         // For example, you can send an API request or handle authentication logic
         try {
@@ -26,7 +28,7 @@ const UserProfilePage = () => {
 
             const result = await response.json();
             if (response.ok)
-                setData(result);
+                setUserData(result);
             else {
                 alert(result['message']);
                 navigate("../../");
@@ -61,10 +63,10 @@ const UserProfilePage = () => {
                         {/*<img src="user-profile-picture.jpg" alt="Profile" />*/}
                     </div>
                     <div className="user-info">
-                        <h1> {"username:" + data.username}</h1> {/* Display user's username */}
-                        <h3> {"joined at:" + data.date_joined}</h3>
-                        <p>{"id : " + data.id}</p> {/* Display additional information */}
-                        <p>{"membership : " + data.membership}</p>
+                        <h1> {"username:" + userData.username}</h1> {/* Display user's username */}
+                        <h3> {"joined at:" + userData.date_joined}</h3>
+                        <p>{"id : " + userData.id}</p> {/* Display additional information */}
+                        <p>{"membership : " + userData.membership}</p>
                     </div>
                 </div>
                 <Link to="/chat" className="chat-button">
@@ -85,7 +87,7 @@ const UserProfilePage = () => {
             <div className="user-section">
                 <h2>Posts</h2>
                 <div className="user-posts">
-                    <UserPost user_id={data.id}/>
+                    <UserPost userId={userData.id}/>
                     {/* Add more UserPost components as needed */}
                 </div>
             </div>
