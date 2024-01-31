@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Link} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import './UserProfilePage.css'; // Import CSS for styling
 import UserHighlight from '../components/User/UserHighlights'; // Corrected import path
 import UserPost from '../components/User/UserPosts'; // Corrected import path
@@ -9,7 +9,7 @@ import UserReview from '../components/User/UserReviews'; // Corrected import pat
 
 const UserProfilePage = () => {
 
-
+    const navigate = useNavigate();
     // const [error, setError] = useState('');
     const [data, setData] = useState({})
     const getData = async () => {
@@ -26,7 +26,13 @@ const UserProfilePage = () => {
             });
 
             const result = await response.json();
-            setData(result)
+            if(response.ok)
+                setData(result);
+            else {
+                alert(result['message']);
+                navigate("../../");
+            }
+
             // alert("Success!")
         } catch (error) {
             // Handle any error that occurred during the request
@@ -36,8 +42,13 @@ const UserProfilePage = () => {
     };
 
     useEffect(() => {
-        getData()
-    },[]);
+        if(localStorage.getItem('token') == null) {
+            alert("please login first");
+            navigate("../../");
+            return;
+        }
+        getData();
+    },);
 
   return (
     <div className="user-profile-container">
