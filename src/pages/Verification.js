@@ -6,12 +6,65 @@ import { Link } from 'react-router-dom';
 const Verification = () => {
   const [verificationCode, setVerificationCode] = useState('');
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Validate the verification code
-    // Here you would typically make a request to your backend to verify the code
-    // If the code is valid, proceed with sign-up completion
-    // If the code is invalid, display an error message
+  const handleSubmit = async (e) => {
+      e.preventDefault();
+
+      const verification = {
+          email: localStorage.getItem('email'),
+          otp: verificationCode
+      };
+
+      const data = {
+          username: localStorage.getItem('username'),
+          phone: localStorage.getItem('phone'),
+          password: localStorage.getItem('password')
+      };
+      try {
+          // Send the POST request to the server
+          const response = await fetch('http://127.0.0.1:8000/user/otp/validator', {
+              method: 'POST',
+              body: JSON.stringify(verification),
+              headers: {
+                  'Content-Type': 'application/json'
+              }
+          });
+
+          const result = await response.json();
+          if(response.ok) {
+              const token = result["token"]
+              localStorage.setItem("token", token)
+          }else
+              alert(result['message']);
+          // alert("Success!")
+      } catch (error) {
+          // Handle any error that occurred during the request
+          alert("error in otp validation")
+      }
+
+      try {
+          // Send the POST request to the server
+          const secondResponse = await fetch('http://127.0.0.1:8000/user/', {
+              method: 'POST',
+              body: JSON.stringify(data),
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': 'token ' + localStorage.getItem('token')
+              }
+
+
+          });
+          const result = await secondResponse.json();
+          if(secondResponse.ok) {
+              alert("your username and password set successfully")
+          }else
+              alert(result['message']);
+
+
+      } catch (error) {
+          // Handle any error that occurred during the request
+          alert("error in setting username and password")
+      }
+
   };
 
   return (
