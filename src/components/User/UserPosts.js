@@ -51,7 +51,7 @@ function UserPosts(props) {
             })
         }).then(r => {
             if (r.ok) {
-                post.doYouLikeIt = !post.doYouLikeIt;
+                getData();
             } else
                 alert("WTF");
         });
