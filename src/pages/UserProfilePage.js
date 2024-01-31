@@ -1,10 +1,15 @@
 import React, {useEffect, useState} from 'react';
+import {Link} from 'react-router-dom';
 import './UserProfilePage.css'; // Import CSS for styling
 import UserHighlight from '../components/User/UserHighlights'; // Corrected import path
 import UserPost from '../components/User/UserPosts'; // Corrected import path
 import UserReview from '../components/User/UserReviews'; // Corrected import path
 
+
+
 const UserProfilePage = () => {
+
+
     // const [error, setError] = useState('');
     const [data, setData] = useState({})
     const getData = async () => {
@@ -52,6 +57,9 @@ const UserProfilePage = () => {
                 <p>{"membership : " + data.membership}</p>
             </div>
         </div>
+        <Link to="/chat" className="chat-button">
+        <span role="img" aria-label="paper-airplane">✈️</span>
+      </Link>
       </div>
 
         {/* User highlights section */}
@@ -81,6 +89,9 @@ const UserProfilePage = () => {
         </div>
       </div>
     </div>
+    
+  
+
   );
 };
 

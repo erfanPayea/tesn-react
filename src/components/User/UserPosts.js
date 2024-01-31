@@ -27,7 +27,7 @@ const UserPosts = () => {
         { id: 1, text: 'The city lights are mesmerizing at night.' },
         { id: 2, text: 'Love the hustle and bustle of the streets!' },
         // Add more comments as needed
-      ] 
+      ]
     },
     // Add more user posts as needed
   ];

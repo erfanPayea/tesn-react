@@ -1,0 +1,21 @@
+.chat-container {
+    /* Your existing styles for the chat container */
+  }
+  
+  .chat-header {
+    /* Your styles for the chat header */
+  }
+  
+  .chat-messages {
+    /* Your styles for the chat messages container */
+  }
+  
+  .message {
+    margin-bottom: 10px; /* Adjust spacing between messages */
+    background-color: #f2f2f2; /* Light gray background */
+    padding: 10px;
+    border-radius: 10px; /* Rounded corners for messages */
+  }
+  
+  /* Additional styles for input fields, send button, etc. */
+  
