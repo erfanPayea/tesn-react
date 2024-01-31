@@ -42,15 +42,21 @@ const SignUp = () => {
         console.log('Login submitted:', username, password, phone);
 
         // Prepare the data object
+        // const data = {
+        //     username: username,
+        //     phone: phone,
+        //     password: password
+        // };
         const data = {
-            username: username,
-            phone: phone,
-            password: password
+            email: email
         };
-
+        localStorage.setItem('username', username);
+        localStorage.setItem('password', password);
+        localStorage.setItem('phone', phone);
+        localStorage.setItem('email', email);
         try {
             // Send the POST request to the server
-            const response = await fetch('http://127.0.0.1:8000/user/', {
+            const response = await fetch('http://127.0.0.1:8000/user/otp', {
                 method: 'POST',
                 body: JSON.stringify(data),
                 headers: {
@@ -59,16 +65,17 @@ const SignUp = () => {
             });
 
             const result = await response.json();
-            const token = result["token"]
-            localStorage.setItem("token", token)
-            alert("Success!")
+            if(response.ok) {
+                // const token = result["token"]
+                // localStorage.setItem("token", token)
+                setShowNotification(true);
+                navigate('/verification');
+            }else
+                alert(result['message']);
         } catch (error) {
             // Handle any error that occurred during the request
-            console.error('Error:', error);
+            alert("error connecting server");
         }
-        setShowNotification(true);
-        navigate('/verification');
-
     };
 
 
