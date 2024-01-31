@@ -10,6 +10,7 @@ import SideMenu from './components/SideMenu';
 import SignUp from './pages/SignUp';
 import Verification from './pages/Verification';
 import ChatPage from './pages/ChatPage';
+import CommentPage from './pages/CommentPage'
 
 const App = () => {
   return (
@@ -23,6 +24,7 @@ const App = () => {
           <Route path="/user/:userId" element={<UserProfilePage />} />
           <Route path="/city/:cityId" element={<CityPage />} />
           <Route path="/attraction/:attractionId" element={<AttractionPage />} />
+          <Route path="/comments/:postId" element={<CommentPage />} />
           <Route path="/chat" element={<ChatPage />} />
         </Routes>
       </div>
