@@ -29,9 +29,13 @@ const Home = () => {
             });
 
             const result = await response.json();
-            const token = result["token"]
-            localStorage.setItem("token", token)
-            alert("Success!")
+            if(response.ok) {
+                const token = result["token"];
+                localStorage.setItem("token", token);
+                alert("Success!");
+            }else
+                alert(result['message']);
+
         } catch (error) {
             // Handle any error that occurred during the request
             // console.error('Error:', error);
