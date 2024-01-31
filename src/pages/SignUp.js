@@ -50,10 +50,7 @@ const SignUp = () => {
         const data = {
             email: email
         };
-        localStorage.setItem('username', username);
-        localStorage.setItem('password', password);
-        localStorage.setItem('phone', phone);
-        localStorage.setItem('email', email);
+
         try {
             // Send the POST request to the server
             const response = await fetch('http://127.0.0.1:8000/user/otp', {
@@ -68,6 +65,10 @@ const SignUp = () => {
             if(response.ok) {
                 // const token = result["token"]
                 // localStorage.setItem("token", token)
+                localStorage.setItem('username', username);
+                localStorage.setItem('password', password);
+                localStorage.setItem('phone', phone);
+                localStorage.setItem('email', email);
                 setShowNotification(true);
                 navigate('/verification');
             }else
