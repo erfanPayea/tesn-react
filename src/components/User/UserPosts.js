@@ -10,7 +10,11 @@ function UserPosts(props) {
 
     async function getData() {
         try {
-            const response = await fetch('http://127.0.0.1:8000/experience/user-posts/' + props.userId, {
+            let endingUrl = 'user-posts/';
+            if (props.viewAll)
+                endingUrl = 'all-user-posts/';
+
+            const response = await fetch('http://127.0.0.1:8000/experience/'+ endingUrl + props.userId, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -65,8 +69,8 @@ function UserPosts(props) {
                     <div key={post.id} className="post-card">
                         <img src={post.filePath} alt="Post"/>
                         <div className="caption">{post.caption}</div>
-                        {/* Display one of the comments */}
-                        <div className="comment">{post.bestCommentMessage}</div>
+                        {/* todo Display one of the comments */}
+                        <div className="comment">{"Best comment?"}</div>
                         <div className="interactions">
                             <button
                                 className={`like-button ${post.doYouLikeIt ? 'active' : ''}`}
@@ -74,7 +78,7 @@ function UserPosts(props) {
                             />
                             <span className="like-count">{post.numberOfLikes}</span>
                             {/* Link to comments page */}
-                            <a href={`/comments/${post.id}`} className="show-comments-link">Show Comments</a>
+                            <a href={`/comments/${post.id}`} className="show-comments-link">View more comments</a>
                         </div>
                     </div>
                 ))}

@@ -87,7 +87,7 @@ function UserProfilePage() {
             <div className="user-section">
                 <h2>Posts</h2>
                 <div className="user-posts">
-                    <UserPost userId={userData.id}/>
+                    <UserPost userId={userData.id} viewAll={true}/>
                     {/* Add more UserPost components as needed */}
                 </div>
             </div>
@@ -96,7 +96,7 @@ function UserProfilePage() {
             <div className="user-section">
                 <h2>Reviews</h2>
                 <div className="user-reviews">
-                    <UserReview/>
+                    <UserReview />
                     {/* Add more UserReview components as needed */}
                 </div>
             </div>
