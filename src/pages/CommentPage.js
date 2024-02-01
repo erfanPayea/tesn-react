@@ -1,29 +1,51 @@
-import React from 'react';
-import { useParams } from 'react-router-dom';
+import React, {useEffect} from 'react';
+import {useNavigate, useParams} from 'react-router-dom';
+import useLocalStorageState from "../components/UseLocalStorageState";
 
 const CommentPage = () => {
-  const { postId } = useParams();
 
-  // Mock comments data for demonstration
-  const comments = [
-    { id: 1, text: 'This sunset was absolutely stunning!' },
-    { id: 2, text: 'Amazing colors in the sky!' },
-    // Add more comments as needed
-  ];
+    const navigate = useNavigate();
+    const {postId} = useParams();
+    const [postComments, setComments] = useLocalStorageState("postComments", [{}]);
 
-  // Filter comments for the selected post
-  const postComments = comments.filter(comment => comment.postId === postId);
+    // Filter postComments for the selected post
+    async function getData() {
+        try {
+            const response = await fetch('http://127.0.0.1:8000/experience/all-comments/' + postId, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'token ' + localStorage.getItem('token'),
+                }
+            });
 
-  return (
-    <div className="comment-page">
-      <h2>Comments</h2>
-      <ul>
-        {postComments.map(comment => (
-          <li key={comment.id}>{comment.text}</li>
-        ))}
-      </ul>
-    </div>
-  );
+            const result = await response.json();
+            if (response.ok)
+                setComments(result["comments"]);
+            else {
+                alert(result['message']);
+                navigate("../../");
+            }
+
+        } catch (error) {
+            console.log("Error", error);
+        }
+    }
+
+    useEffect(() => {
+        getData();
+    }, []);
+
+    return (
+        <div className="comment-page">
+            <h2>Comments</h2>
+            <ul>
+                {postComments.map(comment => (
+                    <li key={comment.id}>{comment.message}</li>
+                ))}
+            </ul>
+        </div>
+    );
 };
 
 export default CommentPage;

@@ -40,7 +40,7 @@ function UserProfilePage() {
             // console.error('Error:', error);
             alert("some problems happen");
         }
-    };
+    }
 
     useEffect(() => {
         if (localStorage.getItem('token') == null) {
@@ -104,6 +104,6 @@ function UserProfilePage() {
 
 
     );
-};
+}
 
 export default UserProfilePage;

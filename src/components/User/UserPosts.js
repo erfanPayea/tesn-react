@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import './UserPosts.css';
 import {useNavigate} from "react-router-dom"; // Import CSS for styling
 import useLocalStorageState from "../UseLocalStorageState";
@@ -38,7 +38,7 @@ function UserPosts(props) {
     // Function to check if a post is liked
 
     // Function to handle like button click
-    const likePost = post => {
+    const likePost = postId => {
         fetch('http://127.0.0.1:8000/experience/like', {
             method: "POST",
             headers: {
@@ -47,7 +47,7 @@ function UserPosts(props) {
             },
             body: JSON.stringify({
                 destinationType: "POST",
-                destinationId: String(post.id),
+                destinationId: String(postId),
             })
         }).then(r => {
             if (r.ok) {
@@ -66,11 +66,11 @@ function UserPosts(props) {
                         <img src={post.filePath} alt="Post"/>
                         <div className="caption">{post.caption}</div>
                         {/* Display one of the comments */}
-                        <div className="comment">{"WTF!"}</div>
+                        <div className="comment">{post.bestCommentMessage}</div>
                         <div className="interactions">
                             <button
                                 className={`like-button ${post.doYouLikeIt ? 'active' : ''}`}
-                                onClick={() => likePost(post)}
+                                onClick={() => likePost(post.id)}
                             />
                             <span className="like-count">{post.numberOfLikes}</span>
                             {/* Link to comments page */}
