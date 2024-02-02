@@ -1,10 +1,12 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Link, useNavigate} from 'react-router-dom';
 import './UserProfilePage.css'; // Import CSS for styling
 import UserHighlight from '../components/User/UserHighlights'; // Corrected import path
 import UserPost from '../components/User/UserPosts'; // Corrected import path
 import UserReview from '../components/User/UserReviews';
-import useLocalStorageState from "../components/UseLocalStorageState"; // Corrected import path
+import useLocalStorageState from "../components/UseLocalStorageState";
+import FloatingWindow from "../components/User/FloatingWindow";
+
 
 
 function UserProfilePage() {
@@ -12,6 +14,7 @@ function UserProfilePage() {
     const navigate = useNavigate();
     // const [error, setError] = useState('');
     const [userData, setUserData] = useLocalStorageState("userData" ,{})
+    const [showFloatingWindow, setShowFloatingWindow] = useState(0);
 
     async function getData() {
         // Perform login logic here with username and password
@@ -51,6 +54,14 @@ function UserProfilePage() {
         getData();
     }, []);
 
+    const showWindow = (type) => {
+        setShowFloatingWindow(type);
+    };
+
+    const handleWindowClose = () => {
+        setShowFloatingWindow(0);
+    };
+
     return (
         <div className="user-profile-container">
             <div className="profile-header">
@@ -67,6 +78,13 @@ function UserProfilePage() {
                         <h3> {"joined at:" + userData.date_joined}</h3>
                         <p>{"id : " + userData.id}</p> {/* Display additional information */}
                         <p>{"membership : " + userData.membership}</p>
+                    </div>
+                    <div className="follow">
+                        <button onClick={() => showWindow(1)}>followers</button>
+                        <button onClick={() => showWindow(2)}>following</button>
+                        {showFloatingWindow > 0 && (
+                            <FloatingWindow onClose={handleWindowClose} type={showFloatingWindow}/>
+                        )}
                     </div>
                 </div>
                 <Link to="/chat" className="chat-button">
