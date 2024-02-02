@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import './UserPosts.css';
 import useLocalStorageState from "../UseLocalStorageState";
-import {useNavigate} from "react-router-dom"; // Import CSS for styling
+import {useNavigate} from "react-router-dom";
+import Post from "../littleComponents/Post";
 
 const UserPosts = (props) => {
-
     const navigate = useNavigate();
     const [newPostCaption, setNewPostCaption] = useState('');
     const [newPostImage, setNewPostImage] = useState(null);
@@ -42,33 +42,6 @@ const UserPosts = (props) => {
         getData();
     }, []);
 
-    async function handleLike(postId) {
-        try {
-            const response = await fetch('http://127.0.0.1:8000/experience/like', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': 'token ' + localStorage.getItem('token'),
-                },
-                body: JSON.stringify({
-                    destinationType: 'POST',
-                    destinationId: String(postId),
-                })
-            });
-
-            const result = await response.json();
-            if (response.ok)
-                getData();
-            else {
-                alert(result['message']);
-                navigate("../../");
-            }
-
-        } catch (error) {
-            console.log("Error", error);
-        }
-    }
-
     async function handleSubmitNewPost(e) {
         try {
             e.preventDefault();
@@ -99,7 +72,7 @@ const UserPosts = (props) => {
         } catch (error) {
             console.log("Error", error);
         }
-    };
+    }
 
     return (
         <div className="user-posts-container">
@@ -122,22 +95,7 @@ const UserPosts = (props) => {
             {/* Posts list */}
             <div className="posts-list">
                 {userPosts.map(post => (
-                    <div key={post.id} className="post-card">
-                        <h3 className="highlight-title">{post.attractionName}</h3>
-                        <img src={post.filePath} alt="Post"/>
-                        <div className="caption">{post.caption}</div>
-                        {/* Display one of the comments */}
-                        <div className="comment">{post.bestComment.message}</div>
-                        <div className="interactions">
-                            <button
-                                className={`like-button ${post.doYouLikeIt ? 'active' : ''}`}
-                                onClick={() => handleLike(post.id)}
-                            />
-                            <span className="like-count">{post.numberOfLikes}</span>
-                            {/* Link to comments page */}
-                            <a href={`/comments/${post.id}`} className="show-comments-link">View more comments</a>
-                        </div>
-                    </div>
+                    <Post post={post} getData={() => getData()}/>
                 ))}
             </div>
         </div>

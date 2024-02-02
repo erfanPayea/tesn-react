@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {useNavigate, useParams} from 'react-router-dom';
 import useLocalStorageState from "../components/UseLocalStorageState";
+import Comment from "../components/littleComponents/Comment";
 
 const CommentPage = () => {
     const {postId} = useParams();
@@ -78,7 +79,7 @@ const CommentPage = () => {
             {/* List of postComments */}
             <ul>
                 {postComments.map(comment => (
-                    <li key={comment.id}>{comment.message}</li>
+                    <Comment comment={comment} getData={() => getData()}/>
                 ))}
             </ul>
             {/* Input field for new comment */}

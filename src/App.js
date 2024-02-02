@@ -23,7 +23,7 @@ const App = () => {
           <Route path="/verification" element={<Verification />} />
           <Route path="/user/:userId" element={<UserProfilePage />} />
           <Route path="/city/:cityId" element={<CityPage />} />
-          <Route path="/attraction/:attractionId" element={<AttractionPage />} />
+          <Route path="/attraction/:attractionId/:viewAll" element={<AttractionPage />} />
           <Route path="/comments/:postId" element={<CommentPage />} />
           <Route path="/chat" element={<ChatPage />} />
         </Routes>
