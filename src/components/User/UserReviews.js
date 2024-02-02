@@ -41,7 +41,7 @@ const UserReviews = () => {
             <div className="reviews-list">
                 {userReviews.map(review => (
                     <div key={review.id} className="review">
-                        <h3 className="review-attraction">{"Attraction?"}</h3>
+                        <h3 className="review-attraction">{review.attractionName}</h3>
                         <p className="review-rating">Rating: {review.rating}</p>
                         <p className="review-text">{review.caption}</p>
                     </div>

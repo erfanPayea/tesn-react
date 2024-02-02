@@ -123,6 +123,7 @@ const UserPosts = (props) => {
             <div className="posts-list">
                 {userPosts.map(post => (
                     <div key={post.id} className="post-card">
+                        <h3 className="highlight-title">{post.attractionName}</h3>
                         <img src={post.filePath} alt="Post"/>
                         <div className="caption">{post.caption}</div>
                         {/* Display one of the comments */}
@@ -134,7 +135,7 @@ const UserPosts = (props) => {
                             />
                             <span className="like-count">{post.numberOfLikes}</span>
                             {/* Link to comments page */}
-                            <a href={`/comments/${post.id}`} className="show-comments-link">Show Comments</a>
+                            <a href={`/comments/${post.id}`} className="show-comments-link">View more comments</a>
                         </div>
                     </div>
                 ))}
