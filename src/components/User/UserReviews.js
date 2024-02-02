@@ -1,7 +1,8 @@
 import React, {useEffect} from 'react';
 import './UserReviews.css';
 import useLocalStorageState from "../UseLocalStorageState";
-import {useNavigate} from "react-router-dom"; // Import CSS for styling
+import {useNavigate} from "react-router-dom";
+import Review from "../littleComponents/Review"; // Import CSS for styling
 
 const UserReviews = () => {
 
@@ -40,11 +41,7 @@ const UserReviews = () => {
             <h2 className="section-title">Reviews</h2>
             <div className="reviews-list">
                 {userReviews.map(review => (
-                    <div key={review.id} className="review">
-                        <h3 className="review-attraction">{"Attraction?"}</h3>
-                        <p className="review-rating">Rating: {review.rating}</p>
-                        <p className="review-text">{review.caption}</p>
-                    </div>
+                    <Review review={review} getData={() => getData()}/>
                 ))}
             </div>
         </div>
