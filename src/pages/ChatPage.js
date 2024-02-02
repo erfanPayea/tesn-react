@@ -1,14 +1,14 @@
 import React, {useEffect, useState} from 'react';
 import './ChatPage.css';
-import {useNavigate} from "react-router-dom";
+import {json, Link, useNavigate} from "react-router-dom";
 import useLocalStorageState from "../components/UseLocalStorageState";
 import Messages from "../components/Chat/Messages"; // Import CSS for styling
 
 const ChatPage = () => {
     const navigate = useNavigate();
-    // const [error, setError] = useState('');
     const [data, setData] = useLocalStorageState("userChats", [{}]);
     const [chatId, setChatID] = useLocalStorageState("id", 0);
+    const [newUserId, setNewUserId] = useState(0);
 
 
     const getData = async () => {
@@ -26,18 +26,42 @@ const ChatPage = () => {
 
             const result = await response.json();
             if(response.ok) {
-                console.log(result);
                 setData(result);
             }
             else {
                 alert(result['message']);
                 navigate("../");
             }
-
-            // alert("Success!")
         } catch (error) {
-            // Handle any error that occurred during the request
-            // console.error('Error:', error);
+            alert("some problems happen");
+        }
+    };
+
+    const newChat = async () => {
+        // Perform login logic here with username and password
+        // For example, you can send an API request or handle authentication logic
+        const data = {
+            'userId' : newUserId
+        }
+        try {
+            // Send the POST request to the server
+            const response = await fetch('http://127.0.0.1:8000/chat/', {
+                method: 'POST',
+                body: JSON.stringify(data),
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'token ' + localStorage.getItem('token'),
+                }
+            });
+
+            const result = await response.json();
+            if(response.ok) {
+                setData([...data, result.data])
+            }
+            else {
+                alert(result['message']);
+            }
+        } catch (error) {
             alert("some problems happen");
         }
     };
@@ -82,8 +106,17 @@ const ChatPage = () => {
                         )}
                     </>
                 ))}
+                    <div className="new-chat">
+                        <input type="input" value={newUserId} placeholder="user id to start chat" required={true}
+                               onChange={event => setNewUserId(event.target.value)}
+                        />
+                        <button className="new-chat-button" onClick={newChat}>
+                            <span role="img">+</span>
+                        </button>
+                    </div>
                 </div>
                 <Messages chatId={chatId}/>
+
             </div>
             {/* Additional components for sending messages, etc. */}
         </div>

@@ -8,7 +8,6 @@
   
 .chat-messages {
     display: flex;
-
     /*flexDirection: column;*/
     /*alignItems: center;*/
 }
@@ -20,6 +19,8 @@
     overflow: hidden;
     border-bottom: 1px solid #ccc;
     padding: 10px;
+    /*align-items: center;*/
+    /*justify-items: center;*/
   /*flexDirection: column;*/
   /*alignItems: center;*/
 }
@@ -32,6 +33,32 @@
     border-radius: 10px; /* Rounded corners for messages */
     height: 10%;
     font-size: 20px;
+}
+
+.new-chat{
+    position: fixed;
+    bottom: 10px;
+    right: 20px;
+    display: flex;
+    align-items: baseline;
+    /*justify-content: center;*/
+}
+
+.new-chat-button {
+    margin-left: 10px;
+    width: 25%;
+    background-color: #96d399; /* Blue color */
+
+    color: white;
+    font-size: 25px;
+    /*padding: 10px;*/
+    border-radius: 50%;
+    text-decoration: none;
+    display: flex;
+    /*align-items: center;*/
+    justify-content: center;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease;
 }
 
 .name:hover{

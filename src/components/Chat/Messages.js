@@ -37,7 +37,7 @@ const ChatComponent = (props) => {
         } catch (error) {
             // Handle any error that occurred during the request
             // console.error('Error:', error);
-            alert("some problems happend");
+            alert("during updating chat some problems happened");
         }
     };
 
@@ -72,7 +72,7 @@ const ChatComponent = (props) => {
         } catch (error) {
             // Handle any error that occurred during the request
             // console.error('Error:', error);
-            alert("some problems happen");
+            alert("sending message was unsuccessful");
         }
     };
 
@@ -92,14 +92,14 @@ const ChatComponent = (props) => {
         }
         if(props.chatId > 0)
             getData();
-    }, []);
+    }, [props.chatId]);
 
     return (
         <div className="container">
             <div className="chat-box">{chatMessages.length > 0 &&
                     chatMessages.map((message, index) => (
-                        <div key={index} className={`message ${message.sender && message.sender.id === userId ? 'user-message':''}`}>
-                            <strong>{message.sender && (message.sender.id === userId ? '' : message.sender.username)}</strong> {message.content}
+                        <div key={index} className="message-container">
+                            <p className={`message ${message.sender && message.sender.id === userId ? 'user-message':''}`}><strong>{message.sender && (message.sender.id === userId ? '' : message.sender.username)}</strong> {message.content}</p>
                         </div>
                     ))}
             </div>
