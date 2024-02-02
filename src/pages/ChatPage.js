@@ -1,11 +1,16 @@
 import React, {useEffect, useState} from 'react';
 import './ChatPage.css';
-import {useNavigate} from "react-router-dom"; // Import CSS for styling
+import {useNavigate} from "react-router-dom";
+import useLocalStorageState from "../components/UseLocalStorageState";
+import Messages from "../components/Chat/Messages"; // Import CSS for styling
 
 const ChatPage = () => {
     const navigate = useNavigate();
     // const [error, setError] = useState('');
-    const [data, setData] = useState([{}])
+    const [data, setData] = useLocalStorageState("userChats", [{}]);
+    const [chatId, setChatID] = useLocalStorageState("id", 0);
+
+
     const getData = async () => {
         // Perform login logic here with username and password
         // For example, you can send an API request or handle authentication logic
@@ -37,6 +42,11 @@ const ChatPage = () => {
         }
     };
 
+    const handelId =(id) =>{
+        if(id > 0)
+            setChatID(id);
+    }
+
     useEffect(() => {
         if(localStorage.getItem('token') == null) {
             alert("please login first");
@@ -61,17 +71,19 @@ const ChatPage = () => {
             </div>
             <div className="chat-messages">
                 {/* Display chat messages */}
+                <div className="chat-names">
                 {data.map(chat => (
-                    <div key={chat.id} className="message">
+                    <>
                         {chat.cantact && (
-                            <div>
-                                <p>{chat.cantact.id}</p>
+                            <div key={chat.id} onClick={() => handelId(chat.id)} className="name">
                                 <p>{chat.cantact.username}</p>
                                 {/* Include other properties of nested_field as needed */}
                             </div>
                         )}
-                    </div>
+                    </>
                 ))}
+                </div>
+                <Messages chatId={chatId}/>
             </div>
             {/* Additional components for sending messages, etc. */}
         </div>

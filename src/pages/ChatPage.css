@@ -1,21 +1,43 @@
 .chat-container {
     /* Your existing styles for the chat container */
-  }
+}
   
-  .chat-header {
+.chat-header {
     /* Your styles for the chat header */
-  }
+}
   
-  .chat-messages {
-    /* Your styles for the chat messages container */
-  }
+.chat-messages {
+    display: flex;
+
+    /*flexDirection: column;*/
+    /*alignItems: center;*/
+}
+
+.chat-names {
+    height: 78vh;
+    width: 10vw;
+    overflow-y: scroll;
+    overflow: hidden;
+    border-bottom: 1px solid #ccc;
+    padding: 10px;
+  /*flexDirection: column;*/
+  /*alignItems: center;*/
+}
+
   
-  .message {
+.name {
     margin-bottom: 10px; /* Adjust spacing between messages */
     background-color: #f2f2f2; /* Light gray background */
     padding: 10px;
     border-radius: 10px; /* Rounded corners for messages */
-  }
+    height: 10%;
+    font-size: 20px;
+}
+
+.name:hover{
+    background-color: #6c6465;
+}
+
   
   /* Additional styles for input fields, send button, etc. */
   
