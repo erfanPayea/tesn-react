@@ -1,0 +1,44 @@
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Semi-transparent black overlay */
+    z-index: 999; /* Ensure it's above other components */
+}
+
+.floating-window {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 200px;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    border: 1px solid #ccc;
+    z-index: 1000;
+
+}
+
+.user-container{
+    overflow-y: scroll;
+    display: block;
+    align-items: center;
+    /*justify-items: center;*/
+    /*place-items: center;*/
+}
+
+.following{
+    text-align: center;
+    color: white;
+    font-size: 25px;
+    display: inline-block;
+
+    /*margin: auto;*/
+    /*width: 80%;*/
+    background-color: #87919f;
+    padding: 10px 15px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+}
