@@ -4,9 +4,11 @@ import './UserPosts.css'; // Import CSS for styling
 const UserPosts = () => {
   // State to track liked posts
   const [likedPosts, setLikedPosts] = useState([]);
+  const [newPostCaption, setNewPostCaption] = useState('');
+  const [newPostImage, setNewPostImage] = useState(null);
 
   // Sample data for user posts
-  const userPosts = [
+  const [userPosts, setUserPosts] = useState([
     { 
       id: 1, 
       imageUrl: 'post1.jpg', 
@@ -30,7 +32,7 @@ const UserPosts = () => {
       ]
     },
     // Add more user posts as needed
-  ];
+  ]);
 
   // Function to check if a post is liked
   const isPostLiked = postId => likedPosts.includes(postId);
@@ -46,16 +48,50 @@ const UserPosts = () => {
     }
   };
 
+  // Function to handle new post submission
+  const handleSubmitNewPost = e => {
+    e.preventDefault();
+    // Create new post object
+    const newPost = {
+      id: userPosts.length + 1, // Generate unique id for new post
+      imageUrl: newPostImage, // Set image URL for new post
+      caption: newPostCaption, // Set caption for new post
+      likes: 0, // Set initial likes count for new post
+      comments: [], // Initialize comments array for new post
+    };
+    // Add new post to userPosts array
+    setUserPosts([...userPosts, newPost]);
+    // Reset form fields
+    setNewPostCaption('');
+    setNewPostImage(null);
+  };
+
   return (
     <div className="user-posts-container">
       <h2 className="section-title">My Posts</h2>
+      {/* New post form */}
+      <form onSubmit={handleSubmitNewPost}>
+        <input
+          type="text"
+          placeholder="Enter caption"
+          value={newPostCaption}
+          onChange={e => setNewPostCaption(e.target.value)}
+        />
+        <input
+          type="file"
+          accept="image/*"
+          onChange={e => setNewPostImage(URL.createObjectURL(e.target.files[0]))}
+        />
+        <button type="submit">Add Post</button>
+      </form>
+      {/* Posts list */}
       <div className="posts-list">
         {userPosts.map(post => (
           <div key={post.id} className="post-card">
             <img src={post.imageUrl} alt="Post" />
             <div className="caption">{post.caption}</div>
             {/* Display one of the comments */}
-            <div className="comment">{post.comments[0].text}</div>
+            <div className="comment">{post.comments[0]?.text}</div>
             <div className="interactions">
               <button
                 className={`like-button ${isPostLiked(post.id) ? 'active' : ''}`}
