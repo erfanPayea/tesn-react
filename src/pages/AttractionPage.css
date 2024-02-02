@@ -21,7 +21,7 @@
   .like-button.active::before {
     color: #ff4d4d; /* Heart color when active */
   }
-  
+
   .like-button:hover::before {
     color: #ff4d4d; /* Heart color on hover */
   }
