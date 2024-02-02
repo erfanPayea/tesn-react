@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import './ChatPage.css';
-import {json, Link, useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import useLocalStorageState from "../components/UseLocalStorageState";
 import Messages from "../components/Chat/Messages"; // Import CSS for styling
 
