@@ -1,4 +1,3 @@
-import {useNavigate} from "react-router-dom";
 import React from "react";
 import LikeButton from "./LikeButton";
 
@@ -11,8 +10,7 @@ const Post = (props) => {
             {/* Display one of the comments */}
             <div className="comment">{props.post.bestComment.message}</div>
             <div className="interactions">
-                <LikeButton boxData={props.post} type={'POST'} getData={() => props.getData()}/>
-                <span className="like-count">{props.post.numberOfLikes}</span>
+                <LikeButton boxData={props.post} type={'POST'} likeCount={props.post.numberOfLikes} getData={() => props.getData()} />
                 {/* Link to comments page */}
                 <a href={`/comments/${props.post.id}`} className="show-comments-link">View more comments</a>
             </div>
