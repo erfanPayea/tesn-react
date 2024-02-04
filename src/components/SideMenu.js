@@ -18,7 +18,7 @@ const SideMenu = () => {
         <ul>
           <li><Link to="/">Home</Link></li>
           <li><Link to="/profile">User Profile</Link></li>
-          <li><Link to="/city/abc">City Page</Link></li>
+          <li><Link to="/city/">City Page</Link></li>
           <li><Link to="/attraction/xyz">Attraction Page</Link></li>
         </ul>
       </nav>

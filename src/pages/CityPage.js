@@ -1,30 +1,35 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-
-// Define the AttractionCard component
-const AttractionCard = ({ attraction }) => {
-  return (
-    <div className="attraction-card">
-      <Link to={`/attraction/${attraction.id}`}>
-        <img src={attraction.imageUrl} alt={attraction.name} />
-        <h3>{attraction.name}</h3>
-        <p>{attraction.description}</p>
-      </Link>
-    </div>
-  );
-};
+import AttractionCard from '../components/littleComponents/AttractionCard'; // Import your AttractionCard component
 
 // Define the Cities component
 const Cities = () => {
   // Sample data for attractions (replace with actual data)
   const attractions = [
-    { id: 1, name: 'Attraction 1', imageUrl: '/attraction1.jpg', description: 'Description of Attraction 1' },
-    { id: 2, name: 'Attraction 2', imageUrl: '/attraction2.jpg', description: 'Description of Attraction 2' },
+    { 
+      id: 1, 
+      name: 'Attraction 1', 
+      imageUrl: '/attraction1.jpg', 
+      description: 'Description of Attraction 1', 
+      reviews: [
+        { id: 1, caption: 'Review 1 for Attraction 1', rating: 4 },
+        { id: 2, caption: 'Review 2 for Attraction 1', rating: 5 },
+      ]
+    },
+    { 
+      id: 2, 
+      name: 'Attraction 2', 
+      imageUrl: '/attraction2.jpg', 
+      description: 'Description of Attraction 2', 
+      reviews: [
+        { id: 3, caption: 'Review 1 for Attraction 2', rating: 3 },
+        { id: 4, caption: 'Review 2 for Attraction 2', rating: 4 },
+      ]
+    },
     // Add more attractions as needed
   ];
 
   return (
-    <div className="cities">
+    <div className="city">
       <h1>Cities</h1>
       <div className="attraction-grid">
         {attractions.map(attraction => (
