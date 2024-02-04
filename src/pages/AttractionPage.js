@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import './AttractionPage.css';
 import useLocalStorageState from "../components/UseLocalStorageState";
 import {useNavigate, useParams} from "react-router-dom";
@@ -9,6 +9,9 @@ const AttractionPage = () => {
     const {attractionId} = useParams();
     const {viewAll} = useParams();
     const [attractionReviews, setAttractionReviews] = useLocalStorageState("attractionReviews", [{}]);
+
+    const [reviewText, setReviewText] = useState('');
+    const [rating, setRating] = useState(3);
 
     async function getData() {
         try {
@@ -36,6 +39,40 @@ const AttractionPage = () => {
         }
     }
 
+        const handleReviewSubmit = async () => {
+        try {
+            const response = await fetch('http://127.0.0.1:8000/experience/review', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'token ' + localStorage.getItem('token'),
+                },
+                body: JSON.stringify({
+                    caption: reviewText,
+                    attractionId: attractionId,
+                    rating: rating
+                })
+            });
+
+            console.log('Response:', response);
+
+            const result = await response.json();
+            console.log('Result:', result);
+
+            if (response.ok) {
+                // Review added successfully, do something if needed
+                alert("Review added successfully!");
+                // Clear the review text input
+                setReviewText('');
+            } else {
+                alert(result['message']);
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            alert("Some problems happened");
+        }
+    };
+
     useEffect(() => {
         getData();
     }, [])
@@ -49,6 +86,18 @@ const AttractionPage = () => {
                 {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
                 {viewAll === 'f' && <a href={`/attraction/${attractionId}/t`} className="show-comments-link">
                     View more</a>}
+                {viewAll === 't' && <div className="user-section">
+                    <h2>Add Review</h2>
+                    <div className="add-review-form">
+                    <textarea
+                        value={reviewText}
+                        onChange={(e) => setReviewText(e.target.value)}
+                        placeholder="Enter your review here..."
+                        rows="4"
+                    />
+                        <button onClick={handleReviewSubmit}>Submit Review</button>
+                    </div>
+                </div>}
             </div>
         </div>
     );

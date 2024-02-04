@@ -12,7 +12,6 @@ function UserProfilePage() {
     const navigate = useNavigate();
     const [userData, setUserData] = useLocalStorageState("userData", {});
     const [showFloatingWindow, setShowFloatingWindow] = useState(0);
-    const [reviewText, setReviewText] = useState('');
 
 
     useEffect(() => {
@@ -45,39 +44,6 @@ function UserProfilePage() {
             alert("Some problems happened");
         }
     }
-
-    const handleReviewSubmit = async () => {
-        try {
-            const response = await fetch('http://127.0.0.1:8000/add-review', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': 'token ' + localStorage.getItem('token'),
-                },
-                body: JSON.stringify({
-                    userId: userData.id,
-                    reviewText: reviewText
-                })
-            });
-
-            console.log('Response:', response);
-
-            const result = await response.json();
-            console.log('Result:', result);
-
-            if (response.ok) {
-                // Review added successfully, do something if needed
-                alert("Review added successfully!");
-                // Clear the review text input
-                setReviewText('');
-            } else {
-                alert(result['message']);
-            }
-        } catch (error) {
-            console.error('Error:', error);
-            alert("Some problems happened");
-        }
-    };
 
     const showWindow = (type) => {
         setShowFloatingWindow(type);
@@ -112,19 +78,6 @@ function UserProfilePage() {
                 <Link to="/chat" className="chat-button">
                     <span role="img" aria-label="paper-airplane">✈️</span>
                 </Link>
-            </div>
-
-            <div className="user-section">
-                <h2>Add Review</h2>
-                <div className="add-review-form">
-                    <textarea
-                        value={reviewText}
-                        onChange={(e) => setReviewText(e.target.value)}
-                        placeholder="Enter your review here..."
-                        rows="4"
-                    />
-                    <button onClick={handleReviewSubmit}>Submit Review</button>
-                </div>
             </div>
 
             {/* User highlights, posts, and reviews sections */}
