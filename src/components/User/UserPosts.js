@@ -9,7 +9,7 @@ const UserPosts = (props) => {
     const [newPostCaption, setNewPostCaption] = useState('');
     const [newPostImage, setNewPostImage] = useLocalStorageState('newPostImageInput', null);
 
-    const [userPosts, setUserPosts] = useLocalStorageState("userPosts", [{}])
+    const [userPosts, setUserPosts] = useLocalStorageState("userPosts" + props.userId , [{}])
 
     async function getData() {
         try {
@@ -76,7 +76,7 @@ const UserPosts = (props) => {
         <div className="user-posts-container">
             <h2 className="section-title">My Posts</h2>
             {/* New post form */}
-            <form onSubmit={handleSubmitNewPost}>
+            {props.isMine && <form onSubmit={handleSubmitNewPost}>
                 <input
                     type="text"
                     placeholder="Enter caption"
@@ -89,7 +89,7 @@ const UserPosts = (props) => {
                     onChange={e => setNewPostImage(e.target.files[0])}
                 />
                 <button type="submit">Add Post</button>
-            </form>
+            </form>}
             {/* Posts list */}
             <div className="posts-list">
                 {userPosts.map(post => (

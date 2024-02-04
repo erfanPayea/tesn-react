@@ -32,8 +32,8 @@ const Verification = () => {
 
             const result = await response.json();
             if (response.ok) {
-                const token = result["token"]
-                localStorage.setItem("token", token)
+                localStorage.setItem("token", result["token"]);
+                localStorage.setItem("currentId", result["id"])
                 navigate('/');
             } else
                 alert(result['message']);
@@ -51,21 +51,17 @@ const Verification = () => {
                     'Content-Type': 'application/json',
                     'Authorization': 'token ' + localStorage.getItem('token')
                 }
-
-
             });
             const result = await secondResponse.json();
-            if (secondResponse.ok) {
+            if (secondResponse.ok)
                 alert("your username and password set successfully")
-            } else
+            else
                 alert(result['message']);
-
 
         } catch (error) {
             // Handle any error that occurred during the request
             alert("error in setting username and password")
         }
-
     };
 
     return (
