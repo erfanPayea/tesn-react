@@ -19,7 +19,6 @@ const Verification = () => {
             username: localStorage.getItem('username'),
             phone: localStorage.getItem('phone'),
             password: localStorage.getItem('password'),
-            avatarPath: localStorage.getItem('avatarPath')
         };
         try {
             // Send the POST request to the server

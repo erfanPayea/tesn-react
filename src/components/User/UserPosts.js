@@ -55,8 +55,8 @@ const UserPosts = (props) => {
                 body: JSON.stringify({
                     'attractionId': String(-1),
                     'caption': newPostCaption,
-                    'filePath': newPostImage,
-                })
+                    'image': newPostImage,
+                }),
             });
 
             const result = await response.json();
@@ -64,10 +64,8 @@ const UserPosts = (props) => {
                 setNewPostCaption('');
                 setNewPostImage(null);
                 getData();
-            } else {
+            } else
                 alert(result['message']);
-                navigate("../../");
-            }
 
         } catch (error) {
             console.log("Error", error);
@@ -88,7 +86,7 @@ const UserPosts = (props) => {
                 <input
                     type="file"
                     accept="image/*"
-                    onChange={e => setNewPostImage(URL.createObjectURL(e.target.files[0]))}
+                    onChange={e => setNewPostImage(e.target.files[0])}
                 />
                 <button type="submit">Add Post</button>
             </form>

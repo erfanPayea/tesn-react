@@ -6,6 +6,7 @@ import UserPost from '../components/User/UserPosts';
 import UserReview from '../components/User/UserReviews';
 import useLocalStorageState from "../components/UseLocalStorageState";
 import FloatingWindow from "../components/User/FloatingWindow";
+import Avatar from "../components/littleComponents/Avatar";
 
 function UserProfilePage() {
     const navigate = useNavigate();
@@ -40,7 +41,7 @@ function UserProfilePage() {
                 alert(result['message']);
                 navigate("../../");
             }
-            alert(userData.avatar_path)
+            alert(userData.avatarImage)
         } catch (error) {
             alert("Some problems happened");
         }
@@ -94,12 +95,10 @@ function UserProfilePage() {
                     {/* Add cover photo or background image */}
                 </div>
                 <div className="profile-details">
-                    <div className="profile-picture">
-                        <img src={userData.avatar_path} alt="AVATAR"/>
-                    </div>
+                    <Avatar avatarPath={userData.avatarImage}/>
                     <div className="user-info">
-                        <h1> {"username:" + userData.username}</h1>
-                        <h3> {"joined at:" + userData.date_joined}</h3>
+                        <h1> {"username : " + userData.username}</h1>
+                        <h3> {"joined at : " + userData.dateJoined}</h3>
                         <p>{"id : " + userData.id}</p>
                         <p>{"membership : " + userData.membership}</p>
                     </div>
