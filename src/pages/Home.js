@@ -30,8 +30,8 @@ const Home = () => {
 
             const result = await response.json();
             if(response.ok) {
-                const token = result["token"];
-                localStorage.setItem("token", token);
+                localStorage.setItem("token", result["token"]);
+                localStorage.setItem("currentId", result["id"]);
                 alert("Success!");
             }else
                 alert(result['message']);

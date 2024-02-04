@@ -60,9 +60,7 @@ const AttractionPage = () => {
             console.log('Result:', result);
 
             if (response.ok) {
-                // Review added successfully, do something if needed
-                alert("Review added successfully!");
-                // Clear the review text input
+                getData();
                 setReviewText('');
             } else {
                 alert(result['message']);

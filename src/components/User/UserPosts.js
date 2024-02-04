@@ -9,7 +9,7 @@ const UserPosts = (props) => {
     const [newPostCaption, setNewPostCaption] = useState('');
     const [newPostImage, setNewPostImage] = useLocalStorageState('newPostImageInput', null);
 
-    const [userPosts, setUserPosts] = useLocalStorageState("userPosts", [{}])
+    const [userPosts, setUserPosts] = useLocalStorageState("userPosts" + String(props.userId) , [{}])
 
     async function getData() {
         try {
@@ -40,7 +40,11 @@ const UserPosts = (props) => {
 
     useEffect(() => {
         getData();
-    }, []);
+    }, [props]);
+
+    async function follow() {
+    //     todo
+    }
 
     async function handleSubmitNewPost(e) {
         try {
@@ -73,10 +77,12 @@ const UserPosts = (props) => {
     }
 
     return (
-        <div className="user-posts-container">
-            <h2 className="section-title">My Posts</h2>
+        <div>
+            {!props.isMine && <button onClick={follow}> Follow </button>}
+            <div className="user-posts-container">
+            <h2 className="section-title"></h2>
             {/* New post form */}
-            <form onSubmit={handleSubmitNewPost}>
+            {props.isMine && <form onSubmit={handleSubmitNewPost}>
                 <input
                     type="text"
                     placeholder="Enter caption"
@@ -89,13 +95,14 @@ const UserPosts = (props) => {
                     onChange={e => setNewPostImage(e.target.files[0])}
                 />
                 <button type="submit">Add Post</button>
-            </form>
+            </form>}
             {/* Posts list */}
             <div className="posts-list">
                 {userPosts.map(post => (
                     <Post post={post} getData={() => getData()}/>
                 ))}
             </div>
+        </div>
         </div>
     );
 };

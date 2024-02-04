@@ -24,6 +24,7 @@ const SignUp = () => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
+
         if (confirmation !== password) {
             setError("password and password confirmation did not match");
             return;

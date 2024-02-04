@@ -6,7 +6,7 @@ const Comment = (props) => {
     return (
         <li key={props.comment.id}>
             <div className="comment-container">
-                <Avatar avatarPath={props.comment.ownerAvatarPath}/>
+                <Avatar avatarPath={props.comment.ownerAvatarPath} userId={props.comment.ownerId}/>
                 <div className="comment-content">
                     <p className="comment-text">{props.comment.message}</p>
                     <LikeButton boxData={props.comment} type={'COMMENT'} likeCount={props.comment.numberOfLikes} getData={() => props.getData()} />
