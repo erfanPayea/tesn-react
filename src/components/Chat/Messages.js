@@ -17,7 +17,7 @@ const ChatComponent = (props) => {
         // For example, you can send an API request or handle authentication logic
         try {
             // Send the POST request to the server
-            const response = await fetch('http://127.0.0.1:8000/chat/'+props.chatId+ '/message', {
+            const response = await fetch('http://127.0.0.1:8000/chat/' + props.chatId + '/message', {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -26,10 +26,9 @@ const ChatComponent = (props) => {
             });
 
             const result = await response.json();
-            if(response.ok) {
+            if (response.ok) {
                 setChatMessages(result);
-            }
-            else {
+            } else {
                 alert(result['message']);
             }
 
@@ -49,7 +48,7 @@ const ChatComponent = (props) => {
         // For example, you can send an API request or handle authentication logic
         try {
             // Send the POST request to the server
-            const response = await fetch('http://127.0.0.1:8000/chat/'+props.chatId+ '/message', {
+            const response = await fetch('http://127.0.0.1:8000/chat/' + props.chatId + '/message', {
                 method: 'POST',
                 body: JSON.stringify(data),
                 headers: {
@@ -59,12 +58,11 @@ const ChatComponent = (props) => {
             });
 
             const result = await response.json();
-            if(response.ok) {
+            if (response.ok) {
                 setNewMessage('');
                 // console.log(localStorage.getItem('userData').username);
                 // setChatMessages(result);
-            }
-            else {
+            } else {
                 alert(result['message']);
             }
 
@@ -80,7 +78,7 @@ const ChatComponent = (props) => {
         if (newMessage.trim() === '') return;
         sendMessage();
 
-        setChatMessages([...chatMessages, { content: newMessage, sender: {id: userId} }]);
+        setChatMessages([...chatMessages, {content: newMessage, sender: {id: userId}}]);
 
     };
 
@@ -90,18 +88,22 @@ const ChatComponent = (props) => {
             navigate("../");
             return;
         }
-        if(props.chatId > 0)
+        if (props.chatId > 0)
             getData();
     }, [props.chatId]);
 
     return (
         <div className="container">
             <div className="chat-box">{chatMessages.length > 0 &&
-                    chatMessages.map((message, index) => (
-                        <div key={index} className="message-container">
-                            <p className={`message ${message.sender && message.sender.id === userId ? 'user-message':''}`}><strong>{message.sender && (message.sender.id === userId ? '' : message.sender.username)}</strong> {message.content}</p>
-                        </div>
-                    ))}
+                chatMessages.map((message, index) => (
+                    <div key={index} className="message-container">
+                        {/* todo: set avatar with contact.avatarPath */}
+                        <p className={`message ${message.sender && message.sender.id === userId ? 'user-message' : ''}`}>
+                            <strong>{message.sender && (message.sender.id === userId ? '' : message.sender.username)}
+                            </strong> {message.content}
+                        </p>
+                    </div>
+                ))}
             </div>
             <div className="input-container">
                 <input

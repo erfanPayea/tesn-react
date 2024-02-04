@@ -6,7 +6,7 @@ import Messages from "../components/Chat/Messages"; // Import CSS for styling
 
 const ChatPage = () => {
     const navigate = useNavigate();
-    const [data, setData] = useLocalStorageState("userChats", [{}]);
+    const [userChats, setUserChats] = useLocalStorageState("userChats", [{}]);
     const [chatId, setChatID] = useLocalStorageState("id", 0);
     const [newUserId, setNewUserId] = useState(0);
 
@@ -26,7 +26,7 @@ const ChatPage = () => {
 
             const result = await response.json();
             if(response.ok) {
-                setData(result);
+                setUserChats(result);
             }
             else {
                 alert(result['message']);
@@ -56,7 +56,7 @@ const ChatPage = () => {
 
             const result = await response.json();
             if(response.ok) {
-                setData([...data, result.data])
+                setUserChats([...data, result.data])
             }
             else {
                 alert(result['message']);
@@ -81,7 +81,7 @@ const ChatPage = () => {
     }, []);
 
 
-    // Sample data for chat messages
+    // Sample userChats for chat messages
     // const chatMessages = [
     //     { id: 1, text: 'Hey, how are you?' },
     //     { id: 2, text: 'I\'m good, thanks! How about you?' },
@@ -96,10 +96,11 @@ const ChatPage = () => {
             <div className="chat-messages">
                 {/* Display chat messages */}
                 <div className="chat-names">
-                {data.map(chat => (
+                {userChats.map(chat => (
                     <>
                         {chat.cantact && (
                             <div key={chat.id} onClick={() => handelId(chat.id)} className="name">
+                                {/* todo: set avatar with contact.avatarPath */}
                                 <p>{chat.cantact.username}</p>
                                 {/* Include other properties of nested_field as needed */}
                             </div>
