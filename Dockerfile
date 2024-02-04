@@ -1,6 +1,6 @@
 # Dockerfile.frontend
 
-FROM node:18.17.0
+FROM node:18.17.0 as build
 
 WORKDIR /app
 
@@ -12,7 +12,7 @@ COPY . .
 
 RUN npm run build
 
-FROM nginx:alpine
+FROM nginx:latest
 
 # Copy the built React app to Nginx's web server directory
 COPY ./nginx/conf.d /etc/nginx/conf.d/
