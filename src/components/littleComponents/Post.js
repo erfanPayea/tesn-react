@@ -11,11 +11,16 @@ const Post = (props) => {
             {/* Display one of the comments */}
             <LikeButton boxData={props.post} type={'POST'} likeCount={props.post.numberOfLikes}
                         getData={() => props.getData()}/>
-            <div className="interactions">
+            {props.post.bestComment.id !== -1 && <div className="interactions">
                 <Comment comment={props.post.bestComment} getData={() => props.getData()}/>
-                {/* Link to comments page */}
                 <a href={`/comments/${props.post.id}`} className="show-comments-link">View more comments</a>
-            </div>
+                {/* Link to comments page */}
+            </div>}
+            {props.post.bestComment.id === -1 && <div>
+                <p>{props.post.bestComment.message}</p>
+                <a href={`/comments/${props.post.id}`} className="show-comments-link">Add new comment</a>
+
+            </div>}
         </div>
     )
 }

@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import React, {useEffect, useState} from 'react';
+import {Link, useNavigate} from 'react-router-dom';
 import './UserProfilePage.css';
 import UserHighlight from '../components/User/UserHighlights';
 import UserPost from '../components/User/UserPosts';
@@ -12,7 +12,7 @@ function UserProfilePage() {
     const [userData, setUserData] = useLocalStorageState("userData", {});
     const [showFloatingWindow, setShowFloatingWindow] = useState(0);
     const [reviewText, setReviewText] = useState('');
-    
+
 
     useEffect(() => {
         if (!localStorage.getItem('token')) {
@@ -40,6 +40,7 @@ function UserProfilePage() {
                 alert(result['message']);
                 navigate("../../");
             }
+            alert(userData.avatar_path)
         } catch (error) {
             alert("Some problems happened");
         }
@@ -58,12 +59,12 @@ function UserProfilePage() {
                     reviewText: reviewText
                 })
             });
-    
+
             console.log('Response:', response);
-    
+
             const result = await response.json();
             console.log('Result:', result);
-    
+
             if (response.ok) {
                 // Review added successfully, do something if needed
                 alert("Review added successfully!");
@@ -94,7 +95,7 @@ function UserProfilePage() {
                 </div>
                 <div className="profile-details">
                     <div className="profile-picture">
-                        {/* Display user's profile picture */}
+                        <img src={userData.avatar_path} alt="AVATAR"/>
                     </div>
                     <div className="user-info">
                         <h1> {"username:" + userData.username}</h1>
@@ -132,7 +133,7 @@ function UserProfilePage() {
             <div className="user-section">
                 <h2>Highlights</h2>
                 <div className="user-highlights">
-                    <UserHighlight />
+                    <UserHighlight/>
                 </div>
             </div>
             <div className="user-section">
@@ -144,7 +145,7 @@ function UserProfilePage() {
             <div className="user-section">
                 <h2>Reviews</h2>
                 <div className="user-reviews">
-                    <UserReview />
+                    <UserReview/>
                 </div>
             </div>
         </div>

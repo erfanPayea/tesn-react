@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import './SignUp.css'; // Import CSS for styling
+import './SignUp.css';
 
 const SignUp = () => {
     const navigate = useNavigate();
@@ -10,18 +10,8 @@ const SignUp = () => {
     const [confirmation, setConfirmation] = useState('');
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
+    const [avatarPath, setAvatarPath] = useState(null);
     const [error, setError] = useState('');
-    // const handleUsernameChange = (event) => {
-    //     setUsername(event.target.value);
-    // };
-    //
-    // const handlePasswordChange = (event) => {
-    //     setPassword(event.target.value);
-    // };
-    //
-    // const handleEmailChange = (event) => {
-    //     setEmail(event.target.value);
-    // };
 
     useEffect(() => {
         if (password === confirmation) {
@@ -37,22 +27,12 @@ const SignUp = () => {
             setError("password and password confirmation did not match");
             return;
         }
-        // Perform login logic here with username and password
-        // For example, you can send an API request or handle authentication logic
         console.log('Login submitted:', username, password, phone);
-
-        // Prepare the data object
-        // const data = {
-        //     username: username,
-        //     phone: phone,
-        //     password: password
-        // };
         const data = {
             email: email
         };
 
         try {
-            // Send the POST request to the server
             const response = await fetch('http://127.0.0.1:8000/user/otp', {
                 method: 'POST',
                 body: JSON.stringify(data),
@@ -63,12 +43,11 @@ const SignUp = () => {
 
             const result = await response.json();
             if(response.ok) {
-                // const token = result["token"]
-                // localStorage.setItem("token", token)
                 localStorage.setItem('username', username);
                 localStorage.setItem('password', password);
                 localStorage.setItem('phone', phone);
                 localStorage.setItem('email', email);
+                localStorage.setItem('avatarPath', avatarPath);
                 setShowNotification(true);
                 navigate('/verification');
             }else
@@ -94,6 +73,11 @@ const SignUp = () => {
                    onChange={(e) => setConfirmation(e.target.value)}/>
             <input type="phone" value={phone} placeholder="phone"
                    onChange={(e) => setPhone(e.target.value)}/>
+            <input
+                    type="file"
+                    accept="image/*"
+                    onChange={e => setAvatarPath(URL.createObjectURL(e.target.files[0]))}
+                />
             <button type="submit">Sign Up</button>
             <p>Already have an account? <Link to="/" className="signin-link">Sign In</Link></p>
             <p>{error}</p>
