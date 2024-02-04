@@ -1,23 +1,31 @@
-import React, { useState } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 
 const LikeButton = (props) => {
     const navigate = useNavigate();
-    const [liked, setLiked] = useState(props.boxData.doYouLikeIt || false);
-    const [likeCount, setLikeCount] = useState(props.likeCount);
 
     async function handleLike(destinationId) {
         try {
-            // Simulate a like action by updating the local state
-            // For actual implementation, you would make an API request
-            setLiked(!liked);
+            const response = await fetch('http://127.0.0.1:8000/experience/like', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'token ' + localStorage.getItem('token'),
+                },
+                body: JSON.stringify({
+                    destinationType: props.type,
+                    destinationId: String(destinationId),
+                })
+            });
 
-            // Update the like count
-            const updatedLikeCount = liked ? likeCount - 1 : likeCount + 1;
-            setLikeCount(updatedLikeCount);
+            const result = await response.json();
+            if (response.ok) {
+                props.getData();
+            } else {
+                alert(result['message']);
+                navigate("../../");
+            }
 
-            // Simulate successful update
-            props.getData();
         } catch (error) {
             console.log("Error", error);
         }
@@ -25,11 +33,11 @@ const LikeButton = (props) => {
 
     return (
         <button
-            className={`like-button ${liked ? 'active' : ''}`}
+            className={`like-button ${props.boxData.doYouLikeIt ? 'active' : ''}`}
             onClick={() => handleLike(props.boxData.id)}
         >
             {/* Display like count */}
-            <span className="like-count">{likeCount}</span>
+            <span className="like-count">{props.boxData.numberOfLikes}</span>
         </button>
     )
 }
