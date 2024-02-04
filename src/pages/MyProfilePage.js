@@ -16,7 +16,7 @@ function MyProfilePage() {
     useEffect(() => {
         if (!localStorage.getItem('token')) {
             alert("Please login first");
-            navigate("../../");
+            navigate("/");
             return;
         }
         getData();
@@ -37,7 +37,7 @@ function MyProfilePage() {
                 setUserData(result);
             else {
                 alert(result['message']);
-                navigate("../../");
+                navigate("/");
             }
         } catch (error) {
             alert("Some problems happened");

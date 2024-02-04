@@ -9,7 +9,7 @@ const UserPosts = (props) => {
     const [newPostCaption, setNewPostCaption] = useState('');
     const [newPostImage, setNewPostImage] = useLocalStorageState('newPostImageInput', null);
 
-    const [userPosts, setUserPosts] = useLocalStorageState("userPosts" + props.userId , [{}])
+    const [userPosts, setUserPosts] = useLocalStorageState("userPosts" + String(props.userId) , [{}])
 
     async function getData() {
         try {
@@ -40,7 +40,11 @@ const UserPosts = (props) => {
 
     useEffect(() => {
         getData();
-    }, []);
+    }, [props]);
+
+    async function follow() {
+    //     todo
+    }
 
     async function handleSubmitNewPost(e) {
         try {
@@ -73,8 +77,10 @@ const UserPosts = (props) => {
     }
 
     return (
-        <div className="user-posts-container">
-            <h2 className="section-title">My Posts</h2>
+        <div>
+            {!props.isMine && <button onClick={follow}> Follow </button>}
+            <div className="user-posts-container">
+            <h2 className="section-title"></h2>
             {/* New post form */}
             {props.isMine && <form onSubmit={handleSubmitNewPost}>
                 <input
@@ -96,6 +102,7 @@ const UserPosts = (props) => {
                     <Post post={post} getData={() => getData()}/>
                 ))}
             </div>
+        </div>
         </div>
     );
 };
