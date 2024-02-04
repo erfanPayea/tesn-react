@@ -41,7 +41,6 @@ function UserProfilePage() {
                 alert(result['message']);
                 navigate("../../");
             }
-            alert(userData.avatarImage)
         } catch (error) {
             alert("Some problems happened");
         }

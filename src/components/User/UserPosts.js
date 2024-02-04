@@ -7,7 +7,7 @@ import Post from "../littleComponents/Post";
 const UserPosts = (props) => {
     const navigate = useNavigate();
     const [newPostCaption, setNewPostCaption] = useState('');
-    const [newPostImage, setNewPostImage] = useState(null);
+    const [newPostImage, setNewPostImage] = useLocalStorageState('newPostImageInput', null);
 
     const [userPosts, setUserPosts] = useLocalStorageState("userPosts", [{}])
 
@@ -46,17 +46,17 @@ const UserPosts = (props) => {
         try {
             e.preventDefault();
 
+            const formData = new FormData();
+            formData.append("attractionId", -1);
+            formData.append("caption", newPostCaption);
+            formData.append("image", newPostImage);
+
             const response = await fetch('http://127.0.0.1:8000/experience/post', {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': 'token ' + localStorage.getItem('token'),
+                    'Authorization': `token ${localStorage.getItem("token")}`,  // Replace `${token}` with your actual token
                 },
-                body: JSON.stringify({
-                    'attractionId': String(-1),
-                    'caption': newPostCaption,
-                    'image': newPostImage,
-                }),
+                body: formData,
             });
 
             const result = await response.json();
