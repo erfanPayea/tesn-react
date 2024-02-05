@@ -25,7 +25,7 @@ const App = () => {
                     <Route path="/profile" element={<MyProfilePage />} />
                     <Route path="/user/:userId" element={<UserPage />} />
                     <Route path="/city/" element={<MainCityPage />} />
-                    <Route path="/city/:cityId/*" element={<CityPage />} />
+                    <Route path="/city/:cityId" element={<CityPage />} />
                     <Route path="/attraction/:attractionId/:viewAll" element={<AttractionPage/>}/>
                     <Route path="/comments/:postId" element={<CommentPage />} />
                     <Route path="/chat" element={<ChatPage />} />

@@ -6,7 +6,7 @@ const AttractionCard = ({ attraction }) => {
   return (
     <div className="attraction-card">
       <Link to={`/attraction/${attraction.id}/f`}>
-        <img src={attraction.imageUrl} alt={attraction.name} />
+        <img src={attraction.image} alt={attraction.name} />
         <h3>{attraction.name}</h3>
         <p>{attraction.description}</p>
       </Link>
