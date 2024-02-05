@@ -43,7 +43,29 @@ const UserPosts = (props) => {
     }, [props]);
 
     async function follow() {
-        //     todo
+        try {
+            const response = await fetch('http://127.0.0.1:8000/user/following', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'token ' + localStorage.getItem('token'),
+                },
+                body: JSON.stringify({
+                    userId: props.userId
+                })
+            });
+
+            const result = await response.json();
+            if (response.ok)
+                getData();
+            else {
+                alert(result['message']);
+                navigate("/");
+            }
+
+        } catch (error) {
+            console.log("Error", error);
+        }
     }
 
     async function handleSubmitNewPost(e) {
