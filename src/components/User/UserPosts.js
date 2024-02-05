@@ -9,7 +9,7 @@ const UserPosts = (props) => {
     const [newPostCaption, setNewPostCaption] = useState('');
     const [newPostImage, setNewPostImage] = useLocalStorageState('newPostImageInput', null);
 
-    const [userPosts, setUserPosts] = useLocalStorageState("userPosts" + String(props.userId) , [{}])
+    const [userPosts, setUserPosts] = useLocalStorageState("userPosts" + String(props.userId), [{}])
 
     async function getData() {
         try {
@@ -43,7 +43,7 @@ const UserPosts = (props) => {
     }, [props]);
 
     async function follow() {
-    //     todo
+        //     todo
     }
 
     async function handleSubmitNewPost(e) {
@@ -80,29 +80,31 @@ const UserPosts = (props) => {
         <div>
             {!props.isMine && <button onClick={follow}> Follow </button>}
             <div className="user-posts-container">
-            <h2 className="section-title"></h2>
-            {/* New post form */}
-            {props.isMine && <form onSubmit={handleSubmitNewPost}>
-                <input
-                    type="text"
-                    placeholder="Enter caption"
-                    value={newPostCaption}
-                    onChange={e => setNewPostCaption(e.target.value)}
-                />
-                <input
-                    type="file"
-                    accept="image/*"
-                    onChange={e => setNewPostImage(e.target.files[0])}
-                />
-                <button type="submit">Add Post</button>
-            </form>}
-            {/* Posts list */}
-            <div className="posts-list">
-                {userPosts.map(post => (
-                    <Post post={post} getData={() => getData()}/>
-                ))}
+                {/* New post form */}
+                {props.isMine && <form className="add-post-section" onSubmit={handleSubmitNewPost}>
+                    <h2 className="add-post-section"> Add new post </h2>
+                    <input
+                        className="input-class"
+                        type="text"
+                        placeholder="Enter caption"
+                        value={newPostCaption}
+                        onChange={e => setNewPostCaption(e.target.value)}
+                    />
+                    <input
+                        className="input-class"
+                        type="file"
+                        accept="image/*"
+                        onChange={e => setNewPostImage(e.target.files[0])}
+                    />
+                    <button type="submit">Add Post</button>
+                </form>}
+                {/* Posts list */}
+                <div className="posts-list">
+                    {userPosts.map(post => (
+                        <Post post={post} getData={() => getData()}/>
+                    ))}
+                </div>
             </div>
-        </div>
         </div>
     );
 };

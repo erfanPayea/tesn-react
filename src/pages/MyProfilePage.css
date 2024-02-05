@@ -12,7 +12,8 @@
   }
   
   .cover-photo {
-    height: 200px;
+    height: 400px;
+    width: 600px;
     background-image: url('../assets/images/Main.webp'); /* Add cover photo or background image */
     background-size: cover;
     border-radius: 10px;

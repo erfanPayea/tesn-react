@@ -5,28 +5,41 @@
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
-  
-  .section-title {
+}
+
+.section-title {
     color: #333;
     font-size: 24px;
     margin-bottom: 20px;
-  }
-  
-  .post {
+}
+
+.post {
     background-color: #fff;
     padding: 15px;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     margin-bottom: 15px;
-  }
-  
-  .post-title {
+}
+
+.post-title {
     color: #28a745;
     font-size: 18px;
-  }
-  
-  .post-content {
+}
+
+.post-content {
     color: #666;
-  }
-  
+}
+
+.post-card {
+    margin-top: 100px;
+}
+
+.add-post-section {
+    width: 400px;
+    margin-left: 80px;
+}
+
+.input-class {
+    width: 300px;
+    margin-left: 40px;
+}
