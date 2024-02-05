@@ -2,7 +2,8 @@ import React, {useEffect, useState} from 'react';
 import './ChatPage.css';
 import {useNavigate} from "react-router-dom";
 import useLocalStorageState from "../components/UseLocalStorageState";
-import Messages from "../components/Chat/Messages"; // Import CSS for styling
+import Messages from "../components/Chat/Messages";
+import Avatar from "../components/littleComponents/Avatar"; // Import CSS for styling
 
 const ChatPage = () => {
     const navigate = useNavigate();
@@ -100,7 +101,7 @@ const ChatPage = () => {
                     <>
                         {chat.cantact && (
                             <div key={chat.id} onClick={() => handelId(chat.id)} className="name">
-                                {/* todo: set avatar with contact.avatarPath */}
+                                <Avatar avatarImage={chat.cantact.avatarImage} userId={chat.cantact.id}/>
                                 <p>{chat.cantact.username}</p>
                                 {/* Include other properties of nested_field as needed */}
                             </div>

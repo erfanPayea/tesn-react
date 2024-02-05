@@ -3,7 +3,8 @@
 import React, {useEffect, useState} from 'react';
 import './Messages.css';
 import useLocalStorageState from "../UseLocalStorageState";
-import {useNavigate} from "react-router-dom"; // Import the CSS file
+import {useNavigate} from "react-router-dom";
+import Avatar from "../littleComponents/Avatar"; // Import the CSS file
 
 const ChatComponent = (props) => {
     const navigate = useNavigate();
@@ -97,7 +98,7 @@ const ChatComponent = (props) => {
             <div className="chat-box">{chatMessages.length > 0 &&
                 chatMessages.map((message, index) => (
                     <div key={index} className="message-container">
-                        {/* todo: set avatar with contact.avatarPath */}
+                        {/*<Avatar avatarPath={message.sender.avatar_image} userId={message.sender.id}/>*/}
                         <p className={`message ${message.sender && message.sender.id === userId ? 'user-message' : ''}`}>
                             <strong>{message.sender && (message.sender.id === userId ? '' : message.sender.username)}
                             </strong> {message.content}

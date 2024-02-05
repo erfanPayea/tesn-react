@@ -1,6 +1,7 @@
 import React, {useEffect} from 'react';
 import "./FloatingWindow.css"
 import useLocalStorageState from "../UseLocalStorageState";
+import Avatar from "../littleComponents/Avatar";
 const FloatingWindow = ({ onClose , type}) => {
     const [data, setData] = useLocalStorageState("following", [{}]);
     const handleBackClick = () => {
@@ -57,8 +58,8 @@ const FloatingWindow = ({ onClose , type}) => {
                         <ul>
                             {following.cantact && (
                                 <div key={following.id}  className="following">
+                                    <Avatar avatarPath={following.cantact.avatarImage} userId={following.cantact.id}/>
                                     <span>{following.cantact.username}</span>
-                                    {/* Include other properties of nested_field as needed */}
                                 </div>
                             )}
                         </ul>
